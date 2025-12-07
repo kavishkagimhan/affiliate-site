@@ -1,9 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
-import PostCard from './PostCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 // Get all posts for sidebar
-let allPosts = [];
+let allPosts: CollectionEntry<'posts'>[] = [];
 try {
   const posts = await getCollection('posts');
   allPosts = posts

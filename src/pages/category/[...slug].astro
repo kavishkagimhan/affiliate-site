@@ -8,21 +8,25 @@ export async function getStaticPaths() {
   const posts = await getCollection('posts');
   const categories = [...new Set(posts.map((post) => post.data.category).filter(Boolean))];
   
-  return categories.map((category) => {
-    const slug = category.toLowerCase().replace(/\s+/g, '-');
-    const categoryPosts = posts.filter(
-      (post) => post.data.category?.toLowerCase().replace(/\s+/g, '-') === slug
-    );
-    
-    return {
-      params: { slug },
-      props: { category, posts: categoryPosts },
-    };
-  });
+  return categories
+    .filter((category): category is string => Boolean(category))
+    .map((category) => {
+      const slug = category.toLowerCase().replace(/\s+/g, '-');
+      const categoryPosts = posts.filter(
+        (post) => post.data.category?.toLowerCase().replace(/\s+/g, '-') === slug
+      );
+      
+      return {
+        params: { slug },
+        props: { category, posts: categoryPosts },
+      };
+    });
 }
 
 const { category, posts } = Astro.props;
-const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+if (!category) {
+  return Astro.redirect('/posts');
+}
 
 const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
