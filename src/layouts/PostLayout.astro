@@ -1,0 +1,205 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SocialShare from '../components/SocialShare.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  date?: Date;
+  author?: string;
+  category?: string;
+  affiliateLink?: string;
+  pros?: string[];
+  cons?: string[];
+}
+
+const {
+  title,
+  description,
+  image = 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80',
+  date,
+  author = 'Admin',
+  category,
+  affiliateLink,
+  pros = [],
+  cons = [],
+} = Astro.props;
+
+const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : '';
+
+const siteURL = Astro.site || 'https://yoursite.com';
+const currentURL = new URL(Astro.url.pathname, siteURL);
+---
+
+<BaseLayout 
+  title={`${title} | Your Affiliate Site`}
+  description={description || title}
+  image={image}
+  type="article"
+>
+  <article class="container mx-auto px-4 py-8 max-w-7xl">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- Breadcrumb -->
+        <nav class="text-sm breadcrumbs mb-6">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Posts</a></li>
+            {category && <li><a href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`}>{category}</a></li>}
+            <li class="text-base-content/60">{title}</li>
+          </ul>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="mb-8">
+          {category && (
+            <span class="badge badge-primary mb-4">{category}</span>
+          )}
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+          
+          <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70 mb-6">
+            {date && (
+              <time datetime={date?.toISOString()}>{formattedDate}</time>
+            )}
+            <span>by {author}</span>
+            {category && (
+              <a href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="link link-primary">
+                {category}
+              </a>
+            )}
+          </div>
+
+          {image && (
+            <img 
+              src={image} 
+              alt={title}
+              class="w-full h-auto rounded-lg shadow-lg mb-6"
+              loading="eager"
+              width="800"
+              height="450"
+            />
+          )}
+        </header>
+
+        <!-- Ad Container (Top) -->
+        <div class="ad-container my-8">
+          <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+          <!-- Google AdSense Ad Unit -->
+          <!-- <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script> -->
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none">
+          <slot />
+        </div>
+
+        <!-- Pros and Cons Section -->
+        {(pros.length > 0 || cons.length > 0) && (
+          <div class="grid md:grid-cols-2 gap-6 my-12">
+            {pros.length > 0 && (
+              <div class="card bg-success/10 border border-success/20">
+                <div class="card-body">
+                  <h3 class="card-title text-success">Pros</h3>
+                  <ul class="list-disc list-inside space-y-2">
+                    {pros.map((pro) => (
+                      <li>{pro}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+            
+            {cons.length > 0 && (
+              <div class="card bg-error/10 border border-error/20">
+                <div class="card-body">
+                  <h3 class="card-title text-error">Cons</h3>
+                  <ul class="list-disc list-inside space-y-2">
+                    {cons.map((con) => (
+                      <li>{con}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        <!-- Affiliate CTA -->
+        {affiliateLink && (
+          <div class="my-8 p-6 bg-primary/10 border border-primary/20 rounded-lg text-center">
+            <h3 class="text-2xl font-bold mb-4">Ready to Buy?</h3>
+            <p class="mb-6">Get the best deal on this product!</p>
+            <a 
+              href={affiliateLink} 
+              target="_blank" 
+              rel="nofollow sponsored noopener"
+              class="affiliate-link"
+            >
+              Check Price on Amazon
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <p class="text-xs text-base-content/60 mt-4">*As an Amazon Associate, I earn from qualifying purchases.</p>
+          </div>
+        )}
+
+        <!-- Social Share -->
+        <SocialShare title={title} url={currentURL.toString()} />
+
+        <!-- Ad Container (Bottom) -->
+        <div class="ad-container my-8">
+          <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+          <!-- Google AdSense Ad Unit -->
+        </div>
+
+        <!-- Article Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": title,
+          "description": description || title,
+          "image": new URL(image, siteURL).toString(),
+          "datePublished": date?.toISOString(),
+          "dateModified": date?.toISOString(),
+          "author": {
+            "@type": "Person",
+            "name": author
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Your Affiliate Site",
+            "logo": {
+              "@type": "ImageObject",
+              "url": new URL("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80", siteURL).toString()
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": currentURL.toString()
+          }
+        })} />
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <Sidebar />
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+

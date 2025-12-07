@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base-100 text-base-content;
+  }
+
+  /* Dark mode: override all text to gray-50 */
+  html[data-theme="dark"] {
+    color: #f9fafb; /* gray-50 */
+  }
+
+  html[data-theme="dark"] body,
+  html[data-theme="dark"] p,
+  html[data-theme="dark"] h1,
+  html[data-theme="dark"] h2,
+  html[data-theme="dark"] h3,
+  html[data-theme="dark"] h4,
+  html[data-theme="dark"] h5,
+  html[data-theme="dark"] h6,
+  html[data-theme="dark"] li,
+  html[data-theme="dark"] span:not(.badge),
+  html[data-theme="dark"] label,
+  html[data-theme="dark"] time,
+  html[data-theme="dark"] td,
+  html[data-theme="dark"] th {
+    @apply text-gray-50;
+  }
+
+  /* Links should remain colored but lighter in dark mode */
+  html[data-theme="dark"] .prose a,
+  html[data-theme="dark"] a:not(.btn):not(.affiliate-link):not(.btn-circle) {
+    @apply text-primary-400 hover:text-primary-300;
+  }
+
+  /* Keep button text colors as they are */
+  html[data-theme="dark"] .btn,
+  html[data-theme="dark"] .affiliate-link,
+  html[data-theme="dark"] .badge {
+    color: inherit;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose h1 {
+    @apply text-4xl font-bold mb-4 mt-8;
+  }
+
+  .prose h2 {
+    @apply text-3xl font-bold mb-3 mt-6;
+  }
+
+  .prose h3 {
+    @apply text-2xl font-semibold mb-2 mt-4;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  /* Dark mode text colors */
+  html[data-theme="dark"] .prose,
+  html[data-theme="dark"] .prose h1,
+  html[data-theme="dark"] .prose h2,
+  html[data-theme="dark"] .prose h3,
+  html[data-theme="dark"] .prose h4,
+  html[data-theme="dark"] .prose h5,
+  html[data-theme="dark"] .prose h6,
+  html[data-theme="dark"] .prose p,
+  html[data-theme="dark"] .prose li,
+  html[data-theme="dark"] .prose span,
+  html[data-theme="dark"] .prose div {
+    @apply text-gray-50;
+  }
+
+  .prose a {
+    @apply text-primary-500 hover:text-primary-600 hover:underline;
+  }
+
+  .prose img {
+    @apply rounded-lg my-6;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-primary-500 pl-4 italic my-4;
+  }
+
+  .affiliate-link {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors no-underline;
+  }
+
+  .ad-container {
+    @apply my-8 p-4 bg-base-200 rounded-lg border-2 border-dashed border-base-300 text-center;
+  }
+}
+

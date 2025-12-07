@@ -1,0 +1,26 @@
+{
+  "name": "affiliate-marketing-website",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^3.1.1",
+    "@astrojs/sitemap": "^3.3.2",
+    "@astrojs/tailwind": "^5.1.4",
+    "astro": "^4.15.11",
+    "daisyui": "^4.12.14",
+    "tailwindcss": "^3.4.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "typescript": "^5.5.4"
+  }
+}
+

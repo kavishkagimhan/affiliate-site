@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const categories = [...new Set(posts.map((post) => post.data.category).filter(Boolean))];
+  
+  return categories.map((category) => {
+    const slug = category.toLowerCase().replace(/\s+/g, '-');
+    const categoryPosts = posts.filter(
+      (post) => post.data.category?.toLowerCase().replace(/\s+/g, '-') === slug
+    );
+    
+    return {
+      params: { slug },
+      props: { category, posts: categoryPosts },
+    };
+  });
+}
+
+const { category, posts } = Astro.props;
+const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+
+const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout 
+  title={`${category} | Category`}
+  description={`Browse all posts in the ${category} category.`}
+>
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <header class="mb-8">
+          <nav class="text-sm breadcrumbs mb-4">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/posts">Posts</a></li>
+              <li class="text-base-content/60">{category}</li>
+            </ul>
+          </nav>
+          <h1 class="text-4xl font-bold mb-4">{category}</h1>
+          <p class="text-lg text-base-content/70">
+            {sortedPosts.length} {sortedPosts.length === 1 ? 'post' : 'posts'} in this category
+          </p>
+        </header>
+
+        {sortedPosts.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {sortedPosts.map((post) => (
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                image={post.data.image}
+                date={post.data.date}
+                category={post.data.category}
+                slug={post.slug}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <p class="text-xl text-base-content/70">No posts found in this category.</p>
+            <a href="/posts" class="btn btn-primary mt-4">Browse All Posts</a>
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <Sidebar />
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+

@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import CTAButton from '../components/CTAButton.astro';
+import { getCollection } from 'astro:content';
+
+const featuredPosts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
+
+const popularPosts = featuredPosts.slice(0, 3);
+const recentPosts = featuredPosts.slice(3, 6);
+---
+
+<BaseLayout 
+  title="Home | Best Affiliate Product Reviews"
+  description="Discover the best products with honest reviews. Find top-rated items with exclusive affiliate deals and recommendations."
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+        <!-- Left Column - Text Content -->
+        <div class="text-center lg:text-left">
+          <!-- <div class="mb-6 inline-block">
+            <span class="badge badge-primary badge-lg px-4 py-2 text-sm font-semibold">
+              Trusted Reviews & Recommendations
+            </span>
+          </div> -->
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 mt-6 lg:mt-0">
+            <span class="hero-title-gradient">
+              Find the Best Products
+            </span>
+          </h1>
+          <p class="text-xl md:text-2xl text-base-content/80 mb-8 leading-relaxed">
+            Discover honest reviews, expert recommendations, and exclusive deals on top-rated products. Your trusted source for making informed purchase decisions.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="/posts" class="btn btn-primary btn-lg px-8 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-200 hover:scale-105">
+              Browse Reviews
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a href="/about" class="btn btn-outline btn-lg px-8 rounded-xl border-2 border-base-content/20 hover:bg-base-content hover:text-base-100 hover:border-base-content transition-all duration-200">
+              Learn More
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right Column - Hero Image -->
+        <div class="relative lg:block hidden">
+          <div class="relative">
+            <img 
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" 
+              alt="Product reviews and recommendations"
+              class="rounded-2xl shadow-2xl w-full h-auto object-cover"
+              loading="eager"
+              width="600"
+              height="600"
+            />
+            <div class="absolute -bottom-6 -left-6 w-full h-full bg-primary/20 rounded-2xl blur-2xl -z-10"></div>
+          </div>
+        </div>
+        
+        <!-- Mobile Image -->
+        <div class="relative lg:hidden block mt-8">
+          <img 
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
+            alt="Product reviews and recommendations"
+            class="rounded-2xl shadow-2xl w-full h-auto object-cover"
+            loading="eager"
+            width="600"
+            height="400"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Ensure gradient text visibility with strong contrast */
+    .hero-title-gradient {
+      /* Light mode: Very dark colors for contrast */
+      background: linear-gradient(to right, #0c4a6e, #075985, #0369a1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #0c4a6e; /* Fallback for browsers that don't support background-clip */
+    }
+    
+    html[data-theme="dark"] .hero-title-gradient {
+      /* Dark mode: Very light colors for contrast */
+      background: linear-gradient(to right, #e0f2fe, #bae6fd, #7dd3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #e0f2fe; /* Fallback for browsers that don't support background-clip */
+    }
+    
+    /* Fix Learn More button hover state */
+    .btn-outline:hover {
+      background-color: rgb(15, 23, 42) !important; /* slate-900 */
+      color: rgb(248, 250, 252) !important; /* slate-50 */
+      border-color: rgb(15, 23, 42) !important;
+    }
+    
+    html[data-theme="dark"] .btn-outline:hover {
+      background-color: rgb(248, 250, 252) !important; /* slate-50 */
+      color: rgb(15, 23, 42) !important; /* slate-900 */
+      border-color: rgb(248, 250, 252) !important;
+    }
+
+    /* Modern CTA Section Styles */
+    .cta-button-primary {
+      @apply inline-flex items-center gap-3 px-8 py-4 bg-white text-primary-600 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-gray-50;
+    }
+
+    .cta-button-primary svg {
+      @apply transition-transform duration-300;
+    }
+
+    .cta-button-primary:hover svg {
+      transform: translateX(4px);
+    }
+
+    .cta-button-secondary {
+      @apply inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-xl font-semibold text-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105;
+    }
+  </style>
+
+  <!-- Featured Products Section -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Featured Reviews</h2>
+      <p class="text-xl text-base-content/70">Hand-picked products with the best ratings</p>
+    </div>
+
+    {featuredPosts.length > 0 && (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {featuredPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.image}
+            date={post.data.date}
+            category={post.data.category}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    )}
+
+    <div class="text-center">
+      <a href="/posts" class="btn btn-primary btn-lg">View All Posts</a>
+    </div>
+  </section>
+
+  <!-- Popular Products Section -->
+  {popularPosts.length > 0 && (
+    <section class="bg-base-200 py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-8 text-center">Most Popular</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {popularPosts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              image={post.data.image}
+              date={post.data.date}
+              category={post.data.category}
+              slug={post.slug}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Ad Container -->
+
+
+  <!-- CTA Section -->
+  <section class="relative py-20 lg:py-24 overflow-hidden">
+    <!-- Background with gradient and decorative elements -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700"></div>
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-6 inline-block">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Discover Amazing Products
+          </span>
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Ready to Find Your Next Purchase?
+        </h2>
+        
+        <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Browse our comprehensive collection of product reviews and get the best deals on top-rated items.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="/posts" class="cta-button-primary">
+            Explore Reviews
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="/about" class="cta-button-secondary">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

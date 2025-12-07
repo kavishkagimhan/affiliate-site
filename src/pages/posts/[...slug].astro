@@ -1,0 +1,76 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Get related posts (same category)
+const allPosts = await getCollection('posts');
+const relatedPosts = allPosts
+  .filter((p) => p.slug !== post.slug && p.data.category === post.data.category)
+  .slice(0, 3);
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  date={post.data.date}
+  author={post.data.author}
+  category={post.data.category}
+  affiliateLink={post.data.affiliateLink}
+  pros={post.data.pros}
+  cons={post.data.cons}
+>
+  <Content />
+
+  <!-- Related Posts -->
+  {relatedPosts.length > 0 && (
+    <section class="mt-16 pt-8 border-t border-base-300">
+      <h2 class="text-3xl font-bold mb-6">Related Posts</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((relatedPost) => (
+          <div class="card bg-base-100 shadow-lg">
+            {relatedPost.data.image && (
+              <figure>
+                <a href={`/posts/${relatedPost.slug}`}>
+                  <img 
+                    src={relatedPost.data.image} 
+                    alt={relatedPost.data.title}
+                    class="w-full h-48 object-cover"
+                    loading="lazy"
+                    width="300"
+                    height="200"
+                  />
+                </a>
+              </figure>
+            )}
+            <div class="card-body">
+              <h3 class="card-title text-lg">
+                <a href={`/posts/${relatedPost.slug}`} class="hover:text-primary">
+                  {relatedPost.data.title}
+                </a>
+              </h3>
+              <p class="text-sm text-base-content/70 line-clamp-2">
+                {relatedPost.data.description}
+              </p>
+              <a href={`/posts/${relatedPost.slug}`} class="btn btn-primary btn-sm mt-4">
+                Read More
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+</PostLayout>
+

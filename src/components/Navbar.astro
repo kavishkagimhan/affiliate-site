@@ -1,0 +1,366 @@
+---
+import DarkModeToggle from './DarkModeToggle.astro';
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/posts' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="navbar sticky top-0 z-50 backdrop-blur-lg bg-base-100/95 border-b border-base-300/30 shadow-md transition-all duration-300">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Mobile Menu Overlay -->
+    <div 
+      id="mobile-menu-overlay"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300 opacity-0"
+      aria-hidden="true"
+    ></div>
+    
+    <!-- Mobile Menu Panel - Full Height -->
+    <div 
+      id="mobile-menu-panel"
+      class="fixed top-0 left-0 h-screen w-full max-w-sm bg-base-100 shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-out lg:hidden flex flex-col"
+    >
+      <!-- Mobile Menu Header -->
+      <div class="flex items-center justify-between p-5 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-b border-base-300/50">
+        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-primary to-primary-focus bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+          AffiliateSite
+        </a>
+        <button 
+          id="mobile-menu-close"
+          type="button"
+          class="btn btn-ghost btn-sm btn-circle hover:bg-base-200 active:scale-95 transition-all duration-200"
+          aria-label="Close menu"
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Navigation -->
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <ul class="space-y-2">
+          {navigation.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all duration-200 group ${
+                  currentPath === item.href 
+                    ? 'bg-gradient-to-r from-primary to-primary-focus text-white scale-[1.02]' 
+                    : 'text-base-content hover:bg-base-200 active:scale-[0.98] hover:shadow-md'
+                }`}
+              >
+                <span class="flex-1 text-base">{item.name}</span>
+                {currentPath === item.href && (
+                  <svg class="w-5 h-5 flex-shrink-0 animate-in fade-in" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                )}
+                {currentPath !== item.href && (
+                  <svg class="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      
+      <!-- Mobile Menu Footer -->
+      <div class="p-5 border-t border-base-300/50 bg-base-200/30 backdrop-blur-sm">
+        <div class="flex items-center justify-between p-4 rounded-xl bg-base-100 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="p-2 rounded-lg bg-primary/10">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-base-content">Theme</span>
+          </div>
+          <button 
+            id="mobile-dark-mode-toggle"
+            type="button"
+            class="btn btn-ghost btn-circle hover:bg-base-200 active:scale-95 transition-all duration-200"
+            aria-label="Toggle dark mode"
+          >
+            <svg id="mobile-sun-icon" class="w-5 h-5 fill-current transition-transform duration-300" viewBox="0 0 24 24">
+              <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/>
+            </svg>
+            <svg id="mobile-moon-icon" class="w-5 h-5 fill-current hidden transition-transform duration-300" viewBox="0 0 24 24">
+              <path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile View: Logo left, Menu button right -->
+    <div class="flex items-center justify-between w-full lg:hidden">
+      <!-- Logo -->
+      <a href="/" class="btn btn-ghost text-xl font-bold px-3 hover:bg-transparent group min-w-0">
+        <span class="text-primary group-hover:text-primary-focus transition-colors duration-200 truncate">
+          AffiliateSite
+        </span>
+      </a>
+      
+      <!-- Mobile menu button -->
+      <button 
+        id="mobile-menu-toggle"
+        type="button"
+        class="btn btn-ghost btn-square p-2.5 rounded-lg hover:bg-base-200 active:scale-95 transition-all duration-200"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon" class="h-6 w-6 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="h-6 w-6 hidden transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Desktop View -->
+    <div class="hidden lg:flex items-center w-full">
+      <div class="navbar-start flex-1 min-w-0">
+        <!-- Logo -->
+        <a href="/" class="btn btn-ghost text-2xl font-bold px-4 hover:bg-transparent group min-w-0">
+          <span class="text-primary group-hover:text-primary-focus transition-colors duration-200 truncate">
+            AffiliateSite
+          </span>
+        </a>
+      </div>
+    
+      <!-- Desktop Navigation -->
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1 gap-2">
+          {navigation.map((item) => (
+            <li>
+              <a 
+                href={item.href} 
+                class={`px-5 py-2.5 font-semibold relative ${
+                  currentPath === item.href 
+                    ? 'text-primary' 
+                    : 'text-base-content/80 '
+                }`}
+              >
+                <span class="relative inline-block">
+                  {item.name}
+                  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Right side actions -->
+      <div class="navbar-end gap-2 hidden lg:flex">
+        <DarkModeToggle />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  html[data-theme="dark"] .navbar {
+    background-color: rgba(17, 24, 39, 0.95);
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+  
+  html[data-theme="light"] .navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(229, 231, 235, 0.5);
+  }
+  
+  /* Ensure logo visibility */
+  .navbar a span {
+    color: rgb(14, 165, 233) !important; /* primary-500 */
+  }
+  
+  html[data-theme="dark"] .navbar a span {
+    color: rgb(56, 189, 248) !important; /* primary-400 for better contrast in dark */
+  }
+  
+  /* Mobile menu animations */
+  #mobile-menu-panel.open {
+    transform: translateX(0);
+  }
+  
+  #mobile-menu-overlay.show {
+    display: block;
+    opacity: 1;
+  }
+  
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Smooth scrollbar for mobile menu */
+  #mobile-menu-panel nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+  
+  #mobile-menu-panel nav::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  #mobile-menu-panel nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  #mobile-menu-panel nav::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+  }
+  
+  #mobile-menu-panel nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
+  
+  /* Underline for active desktop navigation links only */
+  .navbar-center a span span {
+    transform: scaleX(0);
+  }
+  
+  .navbar-center a.text-primary span span {
+    transform: scaleX(1);
+  }
+</style>
+
+<script>
+  (function() {
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const menuClose = document.getElementById('mobile-menu-close');
+    const menuPanel = document.getElementById('mobile-menu-panel');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileThemeToggle = document.getElementById('mobile-dark-mode-toggle');
+    const mobileSunIcon = document.getElementById('mobile-sun-icon');
+    const mobileMoonIcon = document.getElementById('mobile-moon-icon');
+    
+    if (!menuToggle || !menuClose || !menuPanel || !menuOverlay) return;
+    
+    const menuLinks = (menuPanel as HTMLElement).querySelectorAll('a[href^="/"]');
+    let scrollPosition = 0;
+    
+    function updateMobileIcons(theme: string) {
+      if (!mobileSunIcon || !mobileMoonIcon) return;
+      if (theme === 'dark') {
+        (mobileSunIcon as HTMLElement).classList.add('hidden');
+        (mobileMoonIcon as HTMLElement).classList.remove('hidden');
+      } else {
+        (mobileSunIcon as HTMLElement).classList.remove('hidden');
+        (mobileMoonIcon as HTMLElement).classList.add('hidden');
+      }
+    }
+    
+    function openMenu() {
+      // Save scroll position
+      scrollPosition = window.pageYOffset;
+      
+      (menuPanel as HTMLElement).classList.add('open');
+      (menuOverlay as HTMLElement).classList.remove('hidden');
+      // Force reflow to ensure transition works
+      (menuOverlay as HTMLElement).offsetHeight;
+      (menuOverlay as HTMLElement).classList.add('show');
+      (menuIcon as HTMLElement)?.classList.add('hidden');
+      (closeIcon as HTMLElement)?.classList.remove('hidden');
+      document.body.classList.add('menu-open');
+      document.body.style.top = `-${scrollPosition}px`;
+      (menuToggle as HTMLElement).setAttribute('aria-expanded', 'true');
+      
+      // Update mobile theme icons
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      updateMobileIcons(currentTheme);
+    }
+    
+    function closeMenu() {
+      (menuPanel as HTMLElement).classList.remove('open');
+      (menuOverlay as HTMLElement).classList.remove('show');
+      setTimeout(() => {
+        (menuOverlay as HTMLElement).classList.add('hidden');
+      }, 300);
+      (menuIcon as HTMLElement)?.classList.remove('hidden');
+      (closeIcon as HTMLElement)?.classList.add('hidden');
+      document.body.classList.remove('menu-open');
+      document.body.style.top = '';
+      window.scrollTo(0, scrollPosition);
+      (menuToggle as HTMLElement).setAttribute('aria-expanded', 'false');
+    }
+    
+    (menuToggle as HTMLElement).addEventListener('click', openMenu);
+    (menuClose as HTMLElement).addEventListener('click', closeMenu);
+    (menuOverlay as HTMLElement).addEventListener('click', closeMenu);
+    
+    // Mobile theme toggle
+    if (mobileThemeToggle) {
+      (mobileThemeToggle as HTMLElement).addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateMobileIcons(newTheme);
+        
+        // Update main navbar toggle as well
+        const mainToggle = document.getElementById('dark-mode-toggle');
+        const mainSunIcon = document.getElementById('sun-icon');
+        const mainMoonIcon = document.getElementById('moon-icon');
+        
+        if (mainSunIcon && mainMoonIcon) {
+          if (newTheme === 'dark') {
+            (mainSunIcon as HTMLElement).classList.add('hidden');
+            (mainMoonIcon as HTMLElement).classList.remove('hidden');
+          } else {
+            (mainSunIcon as HTMLElement).classList.remove('hidden');
+            (mainMoonIcon as HTMLElement).classList.add('hidden');
+          }
+        }
+        
+        // Dispatch custom event
+        window.dispatchEvent(new CustomEvent('theme-change', { detail: { theme: newTheme } }));
+      });
+    }
+    
+    // Listen for theme changes from main toggle
+    window.addEventListener('theme-change', (e: Event) => {
+      const customEvent = e as CustomEvent<{ theme: string }>;
+      updateMobileIcons(customEvent.detail.theme);
+    });
+    
+    // Close menu when clicking on a link
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(closeMenu, 150);
+      });
+    });
+    
+    // Close menu on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && (menuPanel as HTMLElement).classList.contains('open')) {
+        closeMenu();
+      }
+    });
+    
+    // Prevent body scroll when menu is open
+    (menuPanel as HTMLElement).addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: false });
+  })();
+</script>

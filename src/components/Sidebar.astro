@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+// Get all posts for sidebar
+let allPosts = [];
+try {
+  const posts = await getCollection('posts');
+  allPosts = posts
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 5);
+} catch (e) {
+  // Collection might not exist during build, handle gracefully
+  allPosts = [];
+}
+
+const categories = [
+  { name: 'Electronics', href: '/category/electronics' },
+  { name: 'Fashion', href: '/category/fashion' },
+  { name: 'Home & Garden', href: '/category/home-garden' },
+  { name: 'Health & Fitness', href: '/category/health-fitness' },
+  { name: 'Tech Reviews', href: '/category/tech-reviews' },
+];
+---
+
+<aside class="space-y-6 sticky top-24">
+  <!-- Search Widget -->
+  <div class="card bg-base-100 shadow-lg">
+    <div class="card-body">
+      <h3 class="card-title text-lg">Search Posts</h3>
+      <form action="/posts" method="get" class="form-control">
+        <input 
+          type="text" 
+          name="q" 
+          placeholder="Search..." 
+          class="input input-bordered w-full"
+        />
+        <button type="submit" class="btn btn-primary btn-sm mt-2">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Categories Widget -->
+  <div class="card bg-base-100 shadow-lg">
+    <div class="card-body">
+      <h3 class="card-title text-lg">Categories</h3>
+      <ul class="menu p-0">
+        {categories.map((category) => (
+          <li>
+            <a href={category.href} class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              {category.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Popular Posts -->
+  {allPosts.length > 0 && (
+    <div class="card bg-base-100 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg">Popular Posts</h3>
+        <div class="space-y-4">
+          {allPosts.map((post) => (
+            <div class="flex gap-3">
+              {post.data.image && (
+                <img 
+                  src={post.data.image} 
+                  alt={post.data.title}
+                  class="w-20 h-20 object-cover rounded"
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                />
+              )}
+              <div class="flex-1">
+                <a 
+                  href={`/posts/${post.slug}`} 
+                  class="font-semibold text-sm hover:text-primary line-clamp-2"
+                >
+                  {post.data.title}
+                </a>
+                {post.data.date && (
+                  <p class="text-xs text-base-content/60 mt-1">
+                    {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Ad Container -->
+  <div class="ad-container">
+    <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+    <!-- Google AdSense Sidebar Ad -->
+    <!-- <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script> -->
+  </div>
+</aside>
+

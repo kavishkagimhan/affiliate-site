@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yoursite.com/sitemap.xml
+Sitemap: https://yoursite.com/sitemap-index.xml
+Sitemap: https://yoursite.com/sitemap-0.xml
+
+# Disallow admin or private pages if any
+Disallow: /admin/
+Disallow: /api/
+
+# Allow all posts and pages
+Allow: /posts/
+Allow: /category/
+Allow: /
+
