@@ -197,7 +197,7 @@
   }
 
   .prose img {
-    @apply rounded-2xl my-8 shadow-xl;
+    @apply  my-8 shadow-xl;
     /* Optimize image rendering */
     will-change: transform;
     transition: transform var(--transition-speed-slow) ease;
