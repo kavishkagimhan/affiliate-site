@@ -14,35 +14,70 @@
 
 <style>
   .scroll-to-top-button {
-    @apply fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-primary-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center opacity-0 pointer-events-none;
-    transform: translateY(20px);
+    @apply fixed bottom-8 right-8 z-50 w-14 h-14 rounded-2xl text-white shadow-xl transition-all duration-500 flex items-center justify-center opacity-0 pointer-events-none;
+    background: linear-gradient(135deg, theme('colors.primary.600'), theme('colors.primary.500'));
+    transform: translateY(30px) scale(0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* GPU acceleration */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+
+  .scroll-to-top-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, theme('colors.primary.400'), theme('colors.primary.600'));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+  }
+
+  .scroll-to-top-button:hover::before {
+    opacity: 1;
   }
 
   .scroll-to-top-button.visible {
     @apply opacity-100 pointer-events-auto;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   .scroll-to-top-button:hover {
-    @apply bg-primary-600 scale-110;
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 
+      0 20px 25px -5px rgb(14 165 233 / 0.4),
+      0 10px 10px -5px rgb(14 165 233 / 0.3);
   }
 
   .scroll-to-top-button:active {
-    @apply scale-95;
+    transform: translateY(-2px) scale(1.05);
   }
 
   .scroll-to-top-icon {
-    @apply w-6 h-6 transition-transform duration-300;
+    @apply w-6 h-6 transition-all duration-300;
   }
 
   .scroll-to-top-button:hover .scroll-to-top-icon {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    animation: bounce-up 0.6s ease-in-out infinite;
+  }
+
+  @keyframes bounce-up {
+    0%, 100% {
+      transform: translateY(-3px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
   }
 
   /* Mobile adjustments */
   @media (max-width: 640px) {
     .scroll-to-top-button {
-      @apply bottom-6 right-6 w-11 h-11;
+      @apply bottom-6 right-6 w-12 h-12 rounded-xl;
     }
 
     .scroll-to-top-icon {
@@ -52,11 +87,27 @@
 
   /* Dark mode adjustments */
   html[data-theme="dark"] .scroll-to-top-button {
-    @apply bg-primary-500 shadow-primary-500/30;
+    background: linear-gradient(135deg, theme('colors.primary.500'), theme('colors.primary.600'));
+    box-shadow: 0 10px 25px rgb(56 189 248 / 0.3);
+  }
+
+  html[data-theme="dark"] .scroll-to-top-button::before {
+    background: linear-gradient(135deg, theme('colors.primary.300'), theme('colors.primary.500'));
   }
 
   html[data-theme="dark"] .scroll-to-top-button:hover {
-    @apply bg-primary-400;
+    box-shadow: 
+      0 20px 25px -5px rgb(56 189 248 / 0.4),
+      0 10px 10px -5px rgb(56 189 248 / 0.3);
+  }
+
+  /* Optimize for performance */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-to-top-button,
+    .scroll-to-top-icon {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>
 
@@ -66,26 +117,69 @@
     
     if (!scrollButton) return;
 
-    // Show/hide button based on scroll position
+    let isVisible = false;
+    let scrollTimeout: number;
+
+    // Optimized show/hide button based on scroll position
     function toggleScrollButton() {
       if (!scrollButton) return;
-      if (window.pageYOffset > 300) {
-        scrollButton.classList.add('visible');
-      } else {
-        scrollButton.classList.remove('visible');
+      
+      const shouldBeVisible = window.pageYOffset > 400;
+      
+      if (shouldBeVisible !== isVisible) {
+        isVisible = shouldBeVisible;
+        if (shouldBeVisible) {
+          scrollButton.classList.add('visible');
+        } else {
+          scrollButton.classList.remove('visible');
+        }
       }
     }
 
-    // Scroll to top function
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    // Debounced scroll handler for better performance
+    function handleScroll() {
+      if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
+      }
+      scrollTimeout = window.requestAnimationFrame(toggleScrollButton);
     }
 
-    // Event listeners
-    window.addEventListener('scroll', toggleScrollButton);
+    // Scroll to top function with smooth animation
+    function scrollToTop() {
+      // Use native smooth scroll if available, otherwise fallback
+      if ('scrollBehavior' in document.documentElement.style) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Polyfill for smooth scroll
+        const startPosition = window.pageYOffset;
+        const duration = 800;
+        const startTime = performance.now();
+
+        function animation(currentTime: number) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function (easeInOutCubic)
+          const easing = progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+          
+          window.scrollTo(0, startPosition * (1 - easing));
+          
+          if (progress < 1) {
+            requestAnimationFrame(animation);
+          }
+        }
+        
+        requestAnimationFrame(animation);
+      }
+    }
+
+    // Event listeners with passive flag for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     scrollButton.addEventListener('click', scrollToTop);
 
     // Initial check

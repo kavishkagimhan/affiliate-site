@@ -32,6 +32,13 @@ const siteURL = Astro.site || 'https://yoursite.com';
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Preload critical resources for performance -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    
+    <!-- View Transitions API for smooth page transitions -->
+    <meta name="view-transition" content="same-origin" />
+    
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -80,19 +87,100 @@ const siteURL = Astro.site || 'https://yoursite.com';
     <ScrollToTop />
     
     <!-- Dark Mode Script -->
-    <script>
-      // Dark mode toggle functionality
+    <script is:inline>
+      // Dark mode toggle functionality - inline for performance
       (function() {
         const theme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', theme);
         
         // Listen for theme changes
-        window.addEventListener('theme-change', (e: Event) => {
-          const customEvent = e as CustomEvent<{ theme: string }>;
+        window.addEventListener('theme-change', (e) => {
+          const customEvent = e;
           document.documentElement.setAttribute('data-theme', customEvent.detail.theme);
           localStorage.setItem('theme', customEvent.detail.theme);
         });
       })();
+    </script>
+
+    <!-- View Transitions API Script -->
+    <script>
+      // Enable View Transitions API for smoother page navigation
+      if ('startViewTransition' in document) {
+        // Add smooth transitions between pages
+        document.addEventListener('astro:before-swap', (e) => {
+          if (document.startViewTransition) {
+            e.preventDefault();
+            document.startViewTransition(() => {
+              e.swap();
+            });
+          }
+        });
+      }
+
+      // Add intersection observer for scroll animations
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          }
+        );
+
+        // Observe elements with data-animate attribute
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('[data-animate]').forEach((el) => {
+            observer.observe(el);
+          });
+        });
+      }
+    </script>
+
+    <!-- Performance monitoring (optional) -->
+    <script is:inline>
+      // Log Core Web Vitals for performance monitoring
+      if ('PerformanceObserver' in window) {
+        try {
+          // Track LCP (Largest Contentful Paint)
+          const lcpObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime || 0);
+          });
+          lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+
+          // Track FID (First Input Delay)
+          const fidObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              const fidValue = entry.processingStart ? entry.processingStart - entry.startTime : 0;
+              console.log('FID:', fidValue);
+            });
+          });
+          fidObserver.observe({ entryTypes: ['first-input'] });
+
+          // Track CLS (Cumulative Layout Shift)
+          let clsScore = 0;
+          const clsObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              if (!entry.hadRecentInput && entry.value) {
+                clsScore += entry.value;
+                console.log('CLS:', clsScore);
+              }
+            });
+          });
+          clsObserver.observe({ entryTypes: ['layout-shift'] });
+        } catch (e) {
+          // Silently fail if performance monitoring is not supported
+          console.debug('Performance monitoring not available');
+        }
+      }
     </script>
   </body>
 </html>

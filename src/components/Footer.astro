@@ -19,19 +19,27 @@ const legalLinks = [
 ];
 ---
 
-<footer class="footer bg-base-200/80 text-base-content border-t border-base-300/30 backdrop-blur-sm">
-  <div class="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
+<footer class="footer relative bg-gradient-to-br from-base-200/90 via-base-100/90 to-base-200/90 text-base-content border-t border-base-300/30 backdrop-blur-xl overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+  </div>
+  
+  <div class="container mx-auto px-4 lg:px-8 py-16 lg:py-20 relative z-10">
     <!-- Main Footer Content -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16 mb-12">
       <!-- Brand Section -->
       <div class="col-span-1 md:col-span-1 lg:col-span-1">
-        <a href="/" class="inline-block mb-5 group">
-          <h3 class="text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-primary-500 via-primary-600 to-primary-500 bg-clip-text text-transparent group-hover:opacity-90 transition-all duration-300">
-            AffiliateSite
+        <a href="/" class="inline-block mb-6 group">
+          <h3 class="text-2xl lg:text-3xl font-extrabold group-hover:scale-105 transition-all duration-300">
+            <span class="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-600 bg-clip-text text-transparent animate-gradient-x">
+              AffiliateSite
+            </span>
           </h3>
         </a>
-        <p class="text-sm text-base-content/70 leading-relaxed mb-6 max-w-xs">
-          Your trusted source for honest product reviews and affiliate recommendations.
+        <p class="text-base text-base-content/70 leading-relaxed mb-8 max-w-xs">
+          Your trusted source for honest product reviews and affiliate recommendations. Making your shopping decisions easier.
         </p>
         <!-- Social Media Icons -->
         <div class="flex gap-3">
@@ -40,10 +48,10 @@ const legalLinks = [
               href={social.href} 
               target="_blank" 
               rel="noopener noreferrer"
-              class="footer-social-link"
+              class="footer-social-link group"
               aria-label={`Follow us on ${social.name}`}
             >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d={social.icon} />
               </svg>
             </a>
@@ -89,19 +97,29 @@ const legalLinks = [
       <!-- Newsletter/Info Section -->
       <div class="col-span-1 md:col-span-1 lg:col-span-1">
         <h4 class="footer-section-title">Stay Updated</h4>
-        <p class="text-sm text-base-content/70 mt-6 mb-5 leading-relaxed">
-          Get the latest product reviews and recommendations delivered to your inbox.
+        <p class="text-base text-base-content/70 mt-6 mb-6 leading-relaxed">
+          Get the latest product reviews and exclusive recommendations delivered to your inbox.
         </p>
-        <form class="flex flex-col gap-3">
-          <input 
-            type="email" 
-            placeholder="Enter your email" 
-            class="input input-bordered w-full focus:input-primary transition-colors"
-            aria-label="Email address for newsletter"
-            required
-          />
-          <button type="submit" class="btn btn-primary w-full font-medium">
-            Subscribe
+        <form class="flex flex-col gap-4">
+          <div class="relative">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="input input-bordered w-full focus:input-primary focus:ring-2 focus:ring-primary-200 transition-all duration-300 pr-12 bg-base-100/50 backdrop-blur-sm"
+              aria-label="Email address for newsletter"
+              required
+            />
+            <svg class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <button type="submit" class="btn btn-primary w-full font-bold text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group">
+            <span class="flex items-center gap-2">
+              Subscribe Now
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
           </button>
         </form>
       </div>
@@ -122,43 +140,126 @@ const legalLinks = [
 </footer>
 
 <style>
+  .footer {
+    position: relative;
+  }
+
   .footer-section-title {
-    @apply text-sm font-semibold uppercase tracking-wider text-base-content/90 mb-1;
-    letter-spacing: 0.05em;
+    @apply text-sm font-bold uppercase tracking-wider text-base-content mb-2;
+    letter-spacing: 0.08em;
+    position: relative;
+    display: inline-block;
+  }
+
+  .footer-section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, rgb(14, 165, 233), transparent);
+  }
+
+  html[data-theme="dark"] .footer-section-title::after {
+    background: linear-gradient(90deg, rgb(56, 189, 248), transparent);
   }
 
   .footer-link {
-    @apply block text-sm text-base-content/70 transition-all duration-200 py-2 relative;
+    @apply block text-base text-base-content/70 transition-all duration-300 py-2.5 relative;
+    padding-left: 0;
   }
 
   .footer-link::before {
     content: '';
     @apply absolute left-0 top-1/2 w-0 h-0.5 bg-primary-500 transition-all duration-300 -translate-y-1/2;
+    opacity: 0;
   }
 
   .footer-link:hover {
-    @apply text-primary-500 translate-x-1;
+    @apply text-primary-600 translate-x-2;
+    padding-left: 1rem;
+  }
+
+  html[data-theme="dark"] .footer-link:hover {
+    @apply text-primary-400;
   }
 
   .footer-link:hover::before {
-    @apply w-1.5;
+    @apply w-2;
+    opacity: 1;
   }
 
   .footer-social-link {
-    @apply flex items-center justify-center w-10 h-10 rounded-xl bg-base-300/60 text-base-content/70 transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-lg;
+    @apply flex items-center justify-center w-11 h-11 rounded-xl text-base-content/70 transition-all duration-300 relative overflow-hidden;
+    background: rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+  }
+
+  .footer-social-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgb(14, 165, 233);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+  }
+
+  .footer-social-link:hover::before {
+    width: 200%;
+    height: 200%;
   }
 
   .footer-social-link:hover {
-    @apply bg-primary-500 text-white shadow-primary-500/30;
+    @apply text-white border-primary-500 shadow-lg;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+  }
+
+  html[data-theme="dark"] .footer-social-link {
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+  }
+
+  html[data-theme="dark"] .footer-social-link::before {
+    background: rgb(56, 189, 248);
+  }
+
+  html[data-theme="dark"] .footer-social-link:hover {
+    @apply border-primary-400;
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+  }
+
+  .footer-social-link svg {
+    position: relative;
+    z-index: 1;
   }
 
   .footer-social-link:focus-visible {
     @apply outline outline-2 outline-offset-2;
-    outline-color: rgb(14, 165, 233); /* primary-500 */
+    outline-color: rgb(14, 165, 233);
   }
 
   .footer-link:focus-visible {
     @apply outline outline-2 outline-offset-2 rounded px-1;
-    outline-color: rgb(14, 165, 233); /* primary-500 */
+    outline-color: rgb(14, 165, 233);
+  }
+
+  /* Gradient animation for brand name */
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient-x {
+    background-size: 200% auto;
+    animation: gradient-x 3s ease infinite;
   }
 </style>

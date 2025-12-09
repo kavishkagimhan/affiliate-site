@@ -1,0 +1,72 @@
+---
+// Skeleton loading card for better perceived performance
+---
+
+<article class="post-card bg-base-100 rounded-3xl overflow-hidden shadow-lg border border-base-300/50 animate-pulse">
+  <!-- Skeleton Image -->
+  <div class="post-card-image-wrapper bg-base-300 skeleton" style="aspect-ratio: 16 / 10;">
+  </div>
+  
+  <!-- Skeleton Content -->
+  <div class="p-7 space-y-4">
+    <!-- Category badge skeleton -->
+    <div class="w-24 h-6 bg-base-300 rounded-full skeleton"></div>
+    
+    <!-- Title skeleton -->
+    <div class="space-y-2">
+      <div class="h-6 bg-base-300 rounded skeleton"></div>
+      <div class="h-6 bg-base-300 rounded w-3/4 skeleton"></div>
+    </div>
+    
+    <!-- Description skeleton -->
+    <div class="space-y-2">
+      <div class="h-4 bg-base-300 rounded skeleton"></div>
+      <div class="h-4 bg-base-300 rounded skeleton"></div>
+      <div class="h-4 bg-base-300 rounded w-5/6 skeleton"></div>
+    </div>
+    
+    <!-- Footer skeleton -->
+    <div class="flex items-center justify-between pt-5 border-t border-base-300/50">
+      <div class="h-4 w-24 bg-base-300 rounded skeleton"></div>
+      <div class="h-10 w-32 bg-base-300 rounded-lg skeleton"></div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .post-card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      theme('colors.base.300') 25%,
+      theme('colors.base.200') 50%,
+      theme('colors.base.300') 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  html[data-theme="dark"] .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(51, 65, 85, 0.8) 25%,
+      rgba(71, 85, 105, 0.8) 50%,
+      rgba(51, 65, 85, 0.8) 75%
+    );
+    background-size: 200% 100%;
+  }
+</style>
+
