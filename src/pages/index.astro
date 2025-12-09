@@ -210,17 +210,46 @@ const popularPosts = featuredPosts.slice(0, 3);
       }
     }
 
+    /* Badge colors for better contrast */
+    html[data-theme="light"] .bg-primary-100 {
+      background-color: #dbeafe;
+    }
+
+    html[data-theme="light"] .text-primary-900 {
+      color: #0c4a6e;
+    }
+
+    html[data-theme="light"] .bg-secondary-100 {
+      background-color: #fae8ff;
+    }
+
+    html[data-theme="light"] .text-secondary-900 {
+      color: #701a75;
+    }
+
     /* Secondary color scheme for dark mode */
-    html[data-theme="dark"] .bg-secondary-50 {
-      background-color: rgba(168, 85, 247, 0.1);
+    html[data-theme="dark"] .bg-secondary-100 {
+      background-color: rgba(168, 85, 247, 0.15);
     }
 
-    html[data-theme="dark"] .text-secondary-600 {
-      color: #e879f9;
+    html[data-theme="dark"] .text-secondary-900 {
+      color: #fae8ff;
     }
 
-    html[data-theme="dark"] .border-secondary-100 {
-      border-color: rgba(168, 85, 247, 0.2);
+    html[data-theme="dark"] .border-secondary-200 {
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    html[data-theme="dark"] .bg-primary-100 {
+      background-color: rgba(56, 189, 248, 0.15);
+    }
+
+    html[data-theme="dark"] .text-primary-900 {
+      color: #e0f2fe;
+    }
+
+    html[data-theme="dark"] .border-primary-200 {
+      border-color: rgba(56, 189, 248, 0.3);
     }
 
     html[data-theme="dark"] .from-secondary-600 {
@@ -236,7 +265,7 @@ const popularPosts = featuredPosts.slice(0, 3);
   <section class="container mx-auto px-4 py-20 lg:py-28" data-animate>
     <div class="text-center mb-16 max-w-3xl mx-auto">
       <div class="inline-block mb-4">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-sm font-bold border border-primary-100">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 text-primary-900 text-sm font-bold border border-primary-200">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
@@ -286,7 +315,7 @@ const popularPosts = featuredPosts.slice(0, 3);
       <div class="container mx-auto px-4">
         <div class="text-center mb-16 max-w-3xl mx-auto">
           <div class="inline-block mb-4">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-50 text-secondary-600 text-sm font-bold border border-secondary-100">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-100 text-secondary-900 text-sm font-bold border border-secondary-200">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                 <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
