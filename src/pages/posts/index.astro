@@ -28,14 +28,14 @@ const categories = [...new Set(allPosts.map((post) => post.data.category).filter
       <div class="lg:col-span-2">
         <header class="mb-8">
           <h1 class="text-4xl font-bold mb-4">All Posts</h1>
-          <p class="text-lg text-base-content/70">
+          <p class="text-lg font-medium" style="color: #4b5563;">
             Discover the latest product reviews and recommendations
           </p>
         </header>
 
         <!-- Ad Container -->
         <div class="ad-container mb-8">
-          <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+          <p class="text-sm font-semibold mb-2" style="color: #6b7280;">Advertisement</p>
         </div>
 
         <!-- Posts Grid -->
@@ -80,7 +80,7 @@ const categories = [...new Set(allPosts.map((post) => post.data.category).filter
           </>
         ) : (
           <div class="text-center py-16">
-            <p class="text-xl text-base-content/70">No posts found.</p>
+            <p class="text-xl font-medium" style="color: #4b5563;">No posts found.</p>
           </div>
         )}
       </div>

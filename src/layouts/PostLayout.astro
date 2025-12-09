@@ -53,24 +53,24 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
             <li><a href="/">Home</a></li>
             <li><a href="/posts">Posts</a></li>
             {category && <li><a href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`}>{category}</a></li>}
-            <li class="text-base-content/60">{title}</li>
+            <li class="font-semibold text-base-content opacity-75">{title}</li>
           </ul>
         </nav>
 
         <!-- Article Header -->
         <header class="mb-8">
           {category && (
-            <span class="badge badge-primary mb-4">{category}</span>
+            <span class="inline-block px-4 py-2 rounded-lg bg-primary-600 text-white font-bold text-sm mb-4">{category}</span>
           )}
           <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
           
-          <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70 mb-6">
+          <div class="flex flex-wrap items-center gap-4 text-sm font-medium mb-6" style="color: #4b5563;">
             {date && (
               <time datetime={date?.toISOString()}>{formattedDate}</time>
             )}
             <span>by {author}</span>
             {category && (
-              <a href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="link link-primary">
+              <a href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="text-primary-700 hover:text-primary-800 font-semibold underline">
                 {category}
               </a>
             )}
@@ -90,7 +90,7 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
 
         <!-- Ad Container (Top) -->
         <div class="ad-container my-8">
-          <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+          <p class="text-sm font-semibold mb-2" style="color: #6b7280;">Advertisement</p>
           <!-- Google AdSense Ad Unit -->
           <!-- <ins class="adsbygoogle"
                style="display:block"
@@ -111,12 +111,12 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
         {(pros.length > 0 || cons.length > 0) && (
           <div class="grid md:grid-cols-2 gap-6 my-12">
             {pros.length > 0 && (
-              <div class="card bg-success/10 border border-success/20">
+              <div class="card bg-green-50 border-2 border-green-300">
                 <div class="card-body">
-                  <h3 class="card-title text-success">Pros</h3>
-                  <ul class="list-disc list-inside space-y-2">
+                  <h3 class="card-title text-green-800 font-bold">Pros</h3>
+                  <ul class="list-disc list-inside space-y-2 text-green-900">
                     {pros.map((pro) => (
-                      <li>{pro}</li>
+                      <li class="leading-relaxed">{pro}</li>
                     ))}
                   </ul>
                 </div>
@@ -124,12 +124,12 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
             )}
             
             {cons.length > 0 && (
-              <div class="card bg-error/10 border border-error/20">
+              <div class="card bg-red-50 border-2 border-red-300">
                 <div class="card-body">
-                  <h3 class="card-title text-error">Cons</h3>
-                  <ul class="list-disc list-inside space-y-2">
+                  <h3 class="card-title text-red-800 font-bold">Cons</h3>
+                  <ul class="list-disc list-inside space-y-2 text-red-900">
                     {cons.map((con) => (
-                      <li>{con}</li>
+                      <li class="leading-relaxed">{con}</li>
                     ))}
                   </ul>
                 </div>
@@ -154,7 +154,7 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
-            <p class="text-xs text-base-content/60 mt-4">*As an Amazon Associate, I earn from qualifying purchases.</p>
+            <p class="text-sm font-medium mt-4" style="color: #4b5563;">*As an Amazon Associate, I earn from qualifying purchases.</p>
           </div>
         )}
 
@@ -163,7 +163,7 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
 
         <!-- Ad Container (Bottom) -->
         <div class="ad-container my-8">
-          <p class="text-sm text-base-content/60 mb-2">Advertisement</p>
+          <p class="text-sm font-semibold mb-2" style="color: #6b7280;">Advertisement</p>
           <!-- Google AdSense Ad Unit -->
         </div>
 
@@ -202,4 +202,48 @@ const currentURL = new URL(Astro.url.pathname, siteURL);
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  /* Dark mode adjustments for pros/cons */
+  html[data-theme="dark"] .bg-green-50 {
+    background-color: rgba(6, 78, 59, 0.2);
+  }
+
+  html[data-theme="dark"] .border-green-300 {
+    border-color: rgba(34, 197, 94, 0.4);
+  }
+
+  html[data-theme="dark"] .text-green-800 {
+    color: #86efac;
+  }
+
+  html[data-theme="dark"] .text-green-900 {
+    color: #d1fae5;
+  }
+
+  html[data-theme="dark"] .bg-red-50 {
+    background-color: rgba(127, 29, 29, 0.2);
+  }
+
+  html[data-theme="dark"] .border-red-300 {
+    border-color: rgba(239, 68, 68, 0.4);
+  }
+
+  html[data-theme="dark"] .text-red-800 {
+    color: #fca5a5;
+  }
+
+  html[data-theme="dark"] .text-red-900 {
+    color: #fee2e2;
+  }
+
+  /* Better category badge in header */
+  html[data-theme="dark"] header .bg-primary-600 {
+    background-color: #0284c7;
+  }
+
+  html[data-theme="dark"] header .text-primary-700 {
+    color: #38bdf8;
+  }
+</style>
 
