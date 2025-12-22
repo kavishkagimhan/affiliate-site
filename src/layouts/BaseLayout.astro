@@ -85,22 +85,6 @@ const siteURL = Astro.site || 'https://yoursite.com';
     </main>
     <Footer />
     <ScrollToTop />
-    
-    <!-- Dark Mode Script -->
-    <script is:inline>
-      // Dark mode toggle functionality - inline for performance
-      (function() {
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
-        
-        // Listen for theme changes
-        window.addEventListener('theme-change', (e) => {
-          const customEvent = e;
-          document.documentElement.setAttribute('data-theme', customEvent.detail.theme);
-          localStorage.setItem('theme', customEvent.detail.theme);
-        });
-      })();
-    </script>
 
     <!-- View Transitions API Script -->
     <script>
