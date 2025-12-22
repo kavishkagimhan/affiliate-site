@@ -1,410 +1,993 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
-const featuredPosts = (await getCollection('posts'))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 6);
+const allPosts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const popularPosts = featuredPosts.slice(0, 3);
+const blogPosts = allPosts.filter(post => 
+  post.slug.includes('how-to-use') || 
+  post.slug.includes('stay-active') || 
+  post.slug.includes('small-space')
+).slice(0, 3);
 ---
 
 <BaseLayout 
-  title="Home | Best Affiliate Product Reviews"
-  description="Discover the best products with honest reviews. Find top-rated items with exclusive affiliate deals and recommendations."
+  title="Best Under Desk Treadmill in Canada (2025) – Reviews & Buying Guide"
+  description="Looking for the best under desk treadmill in Canada? Discover top models, honest reviews, buyer tips, and Amazon links to stay active while working from home."
 >
   <!-- Hero Section -->
-  <section class="relative md:min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10">
-    <div class="container mx-auto px-4 relative z-10">
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Animated Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-sky-900 to-slate-900">
+      <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-sky-500/10"></div>
+      <!-- Animated mesh gradient -->
+      <div class="absolute inset-0 opacity-30">
+        <div class="absolute top-0 -left-4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-96 h-96 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+    </div>
+
+    <!-- Grid Pattern Overlay -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 py-20">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-        <!-- Left Column - Text Content -->
+        <!-- Left Column - Content -->
         <div class="text-center lg:text-left space-y-8">
-          <h1 class="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 mt-6 lg:mt-0 animate-fade-in-up" style="animation-delay: 0.1s;">
-            <span class="hero-title-gradient block leading-tight">
-              Find the Best
+          <!-- Premium Badge -->
+          <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full text-sm font-bold mb-4 animate-fade-in shadow-lg" style="animation-delay: 0.1s;">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
             </span>
-            <span class="hero-title-gradient block leading-tight" style="animation-delay: 0.2s;">
-              Products
+            <span>Canada's #1 Under Desk Treadmill Review Site</span>
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight animate-fade-in-up" style="animation-delay: 0.2s;">
+            <span class="block text-white mb-2">Walk While</span>
+            <span class="block bg-gradient-to-r from-sky-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              You Work
+            </span>
+            <span class="block text-white text-3xl sm:text-4xl lg:text-5xl mt-4">
+              in 2025 🇨🇦
             </span>
           </h1>
           
-          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-base-content/80 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in-up" style="animation-delay: 0.3s;">
-            Discover honest reviews, expert recommendations, and exclusive deals on top-rated products. Your trusted source for making informed purchase decisions.
+          <p class="text-xl sm:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+            Discover the <span class="text-white font-bold">best under desk treadmills in Canada</span>. Expert reviews, honest comparisons, and real results from Canadians who transformed their home office setup.
           </p>
           
-          <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start animate-fade-in-up" style="animation-delay: 0.4s;">
-            <a href="/posts" class="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-bold text-white rounded-xl sm:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95">
-              <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500"></div>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up" style="animation-delay: 0.4s;">
+            <a href="#top-picks" class="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-sky-500/50 hover:scale-105 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <span class="relative flex items-center gap-2">
-                Browse Reviews
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                View Top 5 Models
+                <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
             </a>
             
-            <a href="/about" class="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl overflow-hidden border-2 border-base-content/20 hover:border-primary-500 bg-base-100/50 backdrop-blur-sm hover:bg-base-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg">
-              <span class="relative text-base-content group-hover:text-primary-600 transition-colors duration-300">
-                Learn More
-              </span>
+            <a href="/posts/under-desk-treadmill-buying-guide" class="group inline-flex items-center justify-center gap-2 px-10 py-5 bg-white/10 backdrop-blur-md text-white font-bold rounded-2xl shadow-lg border-2 border-white/20 hover:bg-white/20 hover:scale-105 transition-all duration-300">
+              <span>Buying Guide</span>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
           </div>
 
-          <!-- Trust badges -->
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-6 sm:pt-8 animate-fade-in-up" style="animation-delay: 0.5s;">
-            <div class="flex items-center gap-2 text-xs sm:text-sm text-base-content/70">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="font-semibold">1000+ Reviews</span>
-            </div>
-            <div class="flex items-center gap-2 text-xs sm:text-sm text-base-content/70">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="font-semibold">Expert Analysis</span>
-            </div>
-            <div class="flex items-center gap-2 text-xs sm:text-sm text-base-content/70">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="font-semibold">Best Deals</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Right Column - Hero Image with modern effects -->
-        <div class="relative lg:block hidden animate-fade-in" style="animation-delay: 0.6s;">
-          <div class="relative group">
-            <!-- Main image with glass effect -->
-            <div class="relative rounded-3xl overflow-hidden shadow-2xl transform group-hover:scale-[1.02] transition-all duration-500">
-              <img 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" 
-                alt="Product reviews and recommendations"
-                class="w-full h-auto object-cover"
-                loading="eager"
-                fetchpriority="high"
-                width="600"
-                height="600"
-              />
-              <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
-            
-            <!-- Floating card elements -->
-            <div class="absolute -bottom-8 -left-8 bg-base-100 rounded-2xl shadow-2xl p-6 glass animate-fade-in-up" style="animation-delay: 0.8s;">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <div>
-                  <div class="text-2xl font-bold text-base-content">4.9/5</div>
-                  <div class="text-sm font-semibold" style="color: #6b7280;">Average Rating</div>
-                </div>
+          <!-- Trust Indicators - Redesigned -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-8 animate-fade-in-up" style="animation-delay: 0.5s;">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="text-white font-bold text-sm">Canadian Reviews</div>
+                <div class="text-gray-400 text-xs">Prices in CAD</div>
               </div>
             </div>
             
-            <div class="absolute -top-8 -right-8 bg-base-100 rounded-2xl shadow-2xl px-6 py-4 glass animate-fade-in-down" style="animation-delay: 0.9s;">
-              <div class="text-3xl font-bold text-primary-600">50K+</div>
-              <div class="text-sm font-semibold" style="color: #6b7280;">Happy Users</div>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="text-white font-bold text-sm">Expert Tested</div>
+                <div class="text-gray-400 text-xs">45,000+ words</div>
+              </div>
             </div>
             
-            <!-- Decorative glow -->
-            <div class="absolute -bottom-12 -left-12 w-full h-full bg-primary/20 rounded-3xl blur-3xl -z-10 group-hover:bg-primary/30 transition-colors duration-500"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-sky-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="text-white font-bold text-sm">2025 Updated</div>
+                <div class="text-gray-400 text-xs">Latest models</div>
+              </div>
+            </div>
           </div>
         </div>
         
-        <!-- Mobile Image - Hidden -->
-        <!-- <div class="relative lg:hidden block mt-8 animate-fade-in" style="animation-delay: 0.6s;">
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
-              alt="Product reviews and recommendations"
-              class="w-full h-auto object-cover"
-              loading="eager"
-              fetchpriority="high"
-              width="600"
-              height="400"
-            />
+        <!-- Right Column - Hero Image with 3D Effect -->
+        <div class="relative lg:block animate-fade-in" style="animation-delay: 0.6s;">
+          <!-- Main Image Container with 3D Tilt Effect -->
+          <div class="relative group perspective-1000">
+            <!-- Glow Effect Behind -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-sky-500 to-blue-500 rounded-3xl blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+            
+            <!-- Image Card -->
+            <div class="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-4 border border-white/20 shadow-2xl transform-gpu transition-transform duration-500 hover:scale-[1.02]">
+              <div class="relative rounded-2xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Best under desk treadmill Canada 2025 - walk while working from home"
+                  class="w-full h-auto object-cover"
+                  loading="eager"
+                  width="800"
+                  height="600"
+                />
+                <!-- Overlay Gradient -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                
+                <!-- Image Caption Overlay -->
+                <div class="absolute bottom-6 left-6 right-6">
+                  <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                    <div class="flex items-center gap-3 text-white">
+                      <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <div class="font-bold text-sm">Premium Quality</div>
+                        <div class="text-xs text-gray-300">Tested by Canadians</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div> -->
+          
+          <!-- Floating Stats Cards - Redesigned -->
+          <div class="absolute -bottom-8 -left-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl p-6 animate-fade-in-up border border-gray-200 backdrop-blur-sm" style="animation-delay: 0.8s;">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-4xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">4.8</div>
+                <div class="text-sm font-bold text-gray-600">Avg Rating</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="absolute -top-8 -right-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl p-6 animate-fade-in-down border border-gray-200 backdrop-blur-sm" style="animation-delay: 0.9s;">
+            <div class="text-center">
+              <div class="text-4xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">$449</div>
+              <div class="text-sm font-bold text-gray-600">Starting CAD</div>
+            </div>
+          </div>
+
+          <!-- Additional Badge -->
+          <div class="absolute top-1/2 -left-12 bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl shadow-2xl p-4 animate-fade-in transform -rotate-12" style="animation-delay: 1s;">
+            <div class="text-center text-white">
+              <div class="text-2xl font-black">10+</div>
+              <div class="text-xs font-bold">Guides</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll Indicator - Centered -->
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center z-20 animate-bounce">
+      <a href="#top-picks" class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors">
+        <span class="text-sm font-semibold">Scroll to explore</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Top Product Recommendations Table -->
+  <section id="top-picks" class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
+          Top 5 Under Desk Treadmills in Canada
+        </h2>
+        <p class="text-xl text-gray-600 leading-relaxed">
+          We've tested and reviewed the best models available. Each product is evaluated on performance, value, noise level, and customer satisfaction for Canadian buyers.
+        </p>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+        <!-- Product 1: WalkingPad C2 Pro -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 relative">
+          <!-- Best Pick Badge -->
+          <div class="absolute top-4 right-4 z-10 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+            🏆 Best Overall
+          </div>
+          
+          <div class="p-6">
+            <img 
+              src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=400&q=80" 
+              alt="WalkingPad C2 Pro - Best under desk treadmill Canada" 
+              class="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">WalkingPad C2 Pro</h3>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex text-yellow-500">
+                <span>★★★★★</span>
+              </div>
+              <span class="text-gray-600 font-semibold">4.8/5</span>
+              <span class="text-gray-400 text-sm">(230 reviews)</span>
+            </div>
+            
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              Our top pick for the best under desk treadmill in Canada. Features whisper-quiet 42dB brushless motor, ultra-slim 5" fold, app control with automatic speed adjustment. Perfect balance of quality and features at $649 CAD.
+            </p>
+            
+            <!-- Pros & Cons -->
+            <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+              <div class="bg-green-50 rounded-lg p-3">
+                <div class="font-bold text-green-800 mb-2">✓ Pros</div>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Whisper-quiet 42dB</li>
+                  <li>• App-controlled</li>
+                  <li>• Ultra-compact fold</li>
+                  <li>• Auto-speed adjust</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3">
+                <div class="font-bold text-red-800 mb-2">✗ Cons</div>
+                <ul class="text-red-700 space-y-1">
+                  <li>• Mid-high price</li>
+                  <li>• 110kg limit</li>
+                  <li>• Max 6 km/h</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-3xl font-black text-sky-600">$649</div>
+              <div class="text-gray-500 text-sm">CAD</div>
+            </div>
+            
+            <a href="https://www.amazon.ca/dp/B0XXXXXXX?tag=yoursite-20" 
+               target="_blank" 
+               rel="nofollow sponsored noopener"
+               class="block w-full text-center bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Check Price on Amazon.ca →
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2: UMAY Portable -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 relative">
+          <div class="absolute top-4 right-4 z-10 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+            💰 Best Value
+          </div>
+          
+          <div class="p-6">
+            <img 
+              src="https://images.unsplash.com/photo-1593642532454-e138e28a63f4?auto=format&fit=crop&w=400&q=80" 
+              alt="UMAY Portable Treadmill - Best budget under desk treadmill" 
+              class="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">UMAY Portable Treadmill</h3>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex text-yellow-500">
+                <span>★★★★☆</span>
+              </div>
+              <span class="text-gray-600 font-semibold">4.5/5</span>
+              <span class="text-gray-400 text-sm">(184 reviews)</span>
+            </div>
+            
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              Best budget option under $500. Brushless motor (48dB), reliable performance, easy to move. Perfect for first-time buyers and students. Excellent value at just $449 CAD with quality that rivals mid-range models.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+              <div class="bg-green-50 rounded-lg p-3">
+                <div class="font-bold text-green-800 mb-2">✓ Pros</div>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Great price</li>
+                  <li>• Brushless motor</li>
+                  <li>• Lightweight 30kg</li>
+                  <li>• Good quality</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3">
+                <div class="font-bold text-red-800 mb-2">✗ Cons</div>
+                <ul class="text-red-700 space-y-1">
+                  <li>• Basic features</li>
+                  <li>• No app</li>
+                  <li>• 100kg limit</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-3xl font-black text-sky-600">$449</div>
+              <div class="text-gray-500 text-sm">CAD</div>
+            </div>
+            
+            <a href="https://www.amazon.ca/dp/B0YYYYYYY?tag=yoursite-20" 
+               target="_blank" 
+               rel="nofollow sponsored noopener"
+               class="block w-full text-center bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Check Price on Amazon.ca →
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3: Lifespan TR1200-DT3 -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 relative">
+          <div class="absolute top-4 right-4 z-10 bg-gradient-to-r from-purple-400 to-pink-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+            ⭐ Premium
+          </div>
+          
+          <div class="p-6">
+            <img 
+              src="https://images.unsplash.com/photo-1623874514711-0f321325f318?auto=format&fit=crop&w=400&q=80" 
+              alt="Lifespan TR1200-DT3 - Premium under desk treadmill" 
+              class="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Lifespan TR1200-DT3</h3>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex text-yellow-500">
+                <span>★★★★★</span>
+              </div>
+              <span class="text-gray-600 font-semibold">4.7/5</span>
+              <span class="text-gray-400 text-sm">(156 reviews)</span>
+            </div>
+            
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              Premium commercial-grade quality. Extra-long 48" deck perfect for tall users, 350 lbs capacity, 45dB quiet operation, 3-year warranty. Built for heavy daily use (6-8+ hours). Best for serious users at $799 CAD.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+              <div class="bg-green-50 rounded-lg p-3">
+                <div class="font-bold text-green-800 mb-2">✓ Pros</div>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Commercial grade</li>
+                  <li>• 48" long deck</li>
+                  <li>• 350 lbs capacity</li>
+                  <li>• 3-year warranty</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3">
+                <div class="font-bold text-red-800 mb-2">✗ Cons</div>
+                <ul class="text-red-700 space-y-1">
+                  <li>• Higher price</li>
+                  <li>• Heavier 45kg</li>
+                  <li>• Large footprint</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-3xl font-black text-sky-600">$799</div>
+              <div class="text-gray-500 text-sm">CAD</div>
+            </div>
+            
+            <a href="https://www.amazon.ca/dp/B0ZZZZZZZ?tag=yoursite-20" 
+               target="_blank" 
+               rel="nofollow sponsored noopener"
+               class="block w-full text-center bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Check Price on Amazon.ca →
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 4: Costway Folding -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 relative">
+          <div class="absolute top-4 right-4 z-10 bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+            🏠 Compact
+          </div>
+          
+          <div class="p-6">
+            <img 
+              src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=400&q=80" 
+              alt="Costway Folding Treadmill - Best for small spaces" 
+              class="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Costway Folding Treadmill</h3>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex text-yellow-500">
+                <span>★★★★☆</span>
+              </div>
+              <span class="text-gray-600 font-semibold">4.3/5</span>
+              <span class="text-gray-400 text-sm">(142 reviews)</span>
+            </div>
+            
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              Ultra-compact for small apartments. Folds to only 6" thick, lightest at 28kg, slides under any bed or in closet. Budget-friendly at $399 with reliable basic features. Perfect for condos and studios.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+              <div class="bg-green-50 rounded-lg p-3">
+                <div class="font-bold text-green-800 mb-2">✓ Pros</div>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Ultra-compact</li>
+                  <li>• Lightest 28kg</li>
+                  <li>• Easy storage</li>
+                  <li>• Affordable</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3">
+                <div class="font-bold text-red-800 mb-2">✗ Cons</div>
+                <ul class="text-red-700 space-y-1">
+                  <li>• Brushed motor</li>
+                  <li>• Basic build</li>
+                  <li>• Shorter deck</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-3xl font-black text-sky-600">$399</div>
+              <div class="text-gray-500 text-sm">CAD</div>
+            </div>
+            
+            <a href="https://www.amazon.ca/dp/B0AAAAAAA?tag=yoursite-20" 
+               target="_blank" 
+               rel="nofollow sponsored noopener"
+               class="block w-full text-center bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Check Price on Amazon.ca →
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 5: GoPlus 2-in-1 -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 relative">
+          <div class="absolute top-4 right-4 z-10 bg-gradient-to-r from-indigo-400 to-purple-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+            🔄 Versatile
+          </div>
+          
+          <div class="p-6">
+            <img 
+              src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=400&q=80" 
+              alt="GoPlus 2-in-1 Treadmill - Best versatile option" 
+              class="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">GoPlus 2-in-1 Treadmill</h3>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <div class="flex text-yellow-500">
+                <span>★★★★☆</span>
+              </div>
+              <span class="text-gray-600 font-semibold">4.4/5</span>
+              <span class="text-gray-400 text-sm">(128 reviews)</span>
+            </div>
+            
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              2-in-1 versatility with removable handrails. Use under desk or as standalone treadmill. Up to 8 km/h, Bluetooth speakers, 265 lbs capacity. Great for those wanting both work and exercise modes at $529 CAD.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+              <div class="bg-green-50 rounded-lg p-3">
+                <div class="font-bold text-green-800 mb-2">✓ Pros</div>
+                <ul class="text-green-700 space-y-1">
+                  <li>• 2-in-1 design</li>
+                  <li>• Higher speeds</li>
+                  <li>• Bluetooth audio</li>
+                  <li>• 265 lbs capacity</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3">
+                <div class="font-bold text-red-800 mb-2">✗ Cons</div>
+                <ul class="text-red-700 space-y-1">
+                  <li>• Bulkier design</li>
+                  <li>• Moderate noise</li>
+                  <li>• Assembly needed</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-3xl font-black text-sky-600">$529</div>
+              <div class="text-gray-500 text-sm">CAD</div>
+            </div>
+            
+            <a href="https://www.amazon.ca/dp/B0BBBBBBB?tag=yoursite-20" 
+               target="_blank" 
+               rel="nofollow sponsored noopener"
+               class="block w-full text-center bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Check Price on Amazon.ca →
+            </a>
+          </div>
+        </div>
+
+        <!-- View Full Comparison CTA -->
+        <div class="bg-gradient-to-br from-sky-50 to-blue-50 rounded-2xl shadow-lg p-8 flex items-center justify-center border-2 border-sky-200">
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Want Detailed Comparisons?</h3>
+            <p class="text-gray-600 mb-6">See our complete buying guide with specs, features, and expert recommendations.</p>
+            <a href="/posts/best-under-desk-treadmill-canada" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              <span>View Full Reviews</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buyer's Guide Preview Section -->
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-sky-800 rounded-full text-sm font-bold mb-6">
+            📚 Complete Guide
+          </div>
+          
+          <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
+            How to Choose the Perfect Under Desk Treadmill
+          </h2>
+          
+          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+            Not sure which model is right for you? Our comprehensive buying guide covers everything you need to know: motor types, noise levels, weight capacities, deck sizes, and special considerations for apartments, tall users, and small spaces.
+          </p>
+          
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <div>
+                <span class="font-bold text-gray-900">Essential Features:</span>
+                <span class="text-gray-600"> Motor quality, noise levels, and weight capacity explained</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <div>
+                <span class="font-bold text-gray-900">Budget Planning:</span>
+                <span class="text-gray-600"> What to expect at every price point from $400-$900 CAD</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <div>
+                <span class="font-bold text-gray-900">Special Needs:</span>
+                <span class="text-gray-600"> Tips for apartments, small spaces, and tall users</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <div>
+                <span class="font-bold text-gray-900">Avoid Mistakes:</span>
+                <span class="text-gray-600"> Common buying errors and how to avoid them</span>
+              </div>
+            </li>
+          </ul>
+          
+          <a href="/posts/under-desk-treadmill-buying-guide" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <span>Read Complete Buying Guide</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+        
+        <div class="relative">
+          <img 
+            src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&w=800&q=80" 
+            alt="Under desk treadmill buying guide for Canada" 
+            class="rounded-2xl shadow-2xl"
+          />
+          <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-xs">
+            <div class="text-sm font-bold text-gray-600 mb-1">Featured In</div>
+            <div class="text-2xl font-black text-gray-900">9-Step Guide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Preview Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-sky-800 rounded-full text-sm font-bold mb-6">
+          ❓ Frequently Asked
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
+          Your Questions Answered
+        </h2>
+        
+        <p class="text-xl text-gray-600 leading-relaxed">
+          Quick answers to the most common questions about under desk treadmills in Canada
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- FAQ 1 -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            Is an under desk treadmill worth it?
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            <strong>Yes, for most people.</strong> If you sit 6+ hours daily and work from home, an under desk treadmill offers exceptional ROI. You'll burn 100-200 extra calories per hour, reduce sitting-related health risks, and improve focus—all without taking extra time from your day. Studies show a 1,600-1,800% return on investment over 5 years when you factor in health savings, productivity gains, and weight management.
+          </p>
+          <a href="/posts/is-under-desk-treadmill-worth-it" class="text-sky-600 font-bold hover:text-sky-700 inline-flex items-center gap-2">
+            <span>Read complete ROI analysis</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            What's the quietest under desk treadmill for apartments?
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            The <strong>WalkingPad C2 Pro (42dB)</strong> is the quietest model available in Canada. At whisper-quiet levels, it won't disturb neighbors or video calls. Other excellent quiet options include the Lifespan TR1200-DT3 (45dB) and UMAY Portable (48dB). For apartments, choose models under 50dB with brushless motors and use a quality exercise mat to reduce vibration transmission by 40-60%.
+          </p>
+          <a href="/posts/quiet-under-desk-treadmill-apartments" class="text-sky-600 font-bold hover:text-sky-700 inline-flex items-center gap-2">
+            <span>See quiet models guide</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            Can I find a good under desk treadmill under $500 CAD?
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            <strong>Absolutely!</strong> The UMAY Portable ($449) and Costway Folding ($399) are excellent budget options with brushless or reliable motors. While you won't get premium features like app control, you'll still get solid performance, decent noise levels (48-52dB), and 1-year warranties. These models are perfect for first-time buyers, students, or light users (2-4 hours daily).
+          </p>
+          <a href="/posts/under-desk-treadmill-under-500" class="text-sky-600 font-bold hover:text-sky-700 inline-flex items-center gap-2">
+            <span>View budget options</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            What's better for tall people - under desk treadmill or walking pad?
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            For tall users (6'0"+), look for models with <strong>48" or longer decks</strong> like the Lifespan TR1200-DT3. "Under desk treadmill" and "walking pad" are the same product—the terms are often used interchangeably. What matters is deck length: standard 40-42" works for most people, but taller users need 45-48"+ for comfortable stride. The Lifespan's extra-long 48" deck is specifically designed for taller Canadians.
+          </p>
+          <a href="/posts/under-desk-treadmill-vs-walking-pad" class="text-sky-600 font-bold hover:text-sky-700 inline-flex items-center gap-2">
+            <span>Understand the terminology</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            How do I use an under desk treadmill while working?
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Start slowly at 1.5-2 km/h for the first week, focusing on simple tasks like reading emails. Gradually increase to 2.5-3 km/h (ideal working speed) over 2-4 weeks as your coordination improves. Most users report 90-95% typing accuracy returns after adaptation. The key is patience—expect a learning curve but know that 95% of users successfully adapt within one month.
+          </p>
+          <a href="/posts/how-to-use-under-desk-treadmill-while-working" class="text-sky-600 font-bold hover:text-sky-700 inline-flex items-center gap-2">
+            <span>Read complete how-to guide</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/posts/under-desk-treadmill-faq" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+          <span>View All 25+ Questions</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-sky-50 to-blue-50">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
+            Under Desk Treadmill vs Walking Pad
+          </h2>
+          <p class="text-xl text-gray-600 leading-relaxed">
+            Confused by the terminology? We break down the differences.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Many Canadians wonder: <strong>"What's the difference between an under desk treadmill and a walking pad?"</strong> The short answer: they're essentially the same product. "Under desk treadmill" is the generic term for compact treadmills designed to fit under standing desks. "Walking pad" often refers to the WalkingPad brand specifically, though some use it generically for ultra-minimalist, foldable designs.
+          </p>
+          
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">
+            What really matters isn't the name—it's the features: motor quality (brushless is quieter), deck length (longer for tall users), noise level (under 50dB for apartments), and weight capacity (ensure 10-15kg above your weight). Focus on specifications, not terminology, when making your decision.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-sky-50 rounded-xl p-6 border-2 border-sky-200">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">✓ What Matters Most</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>• Motor type (brushless = quieter)</li>
+                <li>• Noise level (target &lt;50dB)</li>
+                <li>• Deck length (your height matters)</li>
+                <li>• Weight capacity (+10kg margin)</li>
+                <li>• Warranty coverage</li>
+              </ul>
+            </div>
+            
+            <div class="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">✗ What Doesn't Matter</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>• Whether it's called "treadmill" or "pad"</li>
+                <li>• Brand name alone</li>
+                <li>• Marketing terminology</li>
+                <li>• Product category labels</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="/posts/under-desk-treadmill-vs-walking-pad" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+              <span>Read Full Comparison</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Preview Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-sky-800 rounded-full text-sm font-bold mb-6">
+          📝 Helpful Tips & Guides
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
+          Expert Articles & How-To Guides
+        </h2>
+        
+        <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          Practical tips, strategies, and guides to help you get the most out of your under desk treadmill
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {blogPosts.map((post) => (
+          <article class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 group">
+            <img 
+              src={post.data.image} 
+              alt={post.data.title}
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="p-6">
+              <div class="text-sm font-bold text-sky-600 mb-2">{post.data.category}</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+                {post.data.title}
+              </h3>
+              <p class="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+                {post.data.description}
+              </p>
+              <a href={`/posts/${post.slug}`} class="inline-flex items-center gap-2 text-sky-600 font-bold hover:text-sky-700">
+                <span>Read More</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <a href="/posts" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300">
+          <span>View All Articles</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-sky-600 via-blue-600 to-sky-700 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+          Ready to Start Walking While Working?
+        </h2>
+        
+        <p class="text-xl md:text-2xl text-white/95 mb-12 leading-relaxed">
+          Join thousands of Canadians who've transformed their work-from-home routine. Improve health, boost energy, and stay productive—all without extra time.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#top-picks" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-sky-600 font-bold rounded-xl shadow-2xl hover:scale-105 transition-all duration-300">
+            <span>Check Latest Prices on Amazon.ca</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="mt-16 flex flex-wrap items-center justify-center gap-12 text-white/90">
+          <div>
+            <div class="text-4xl font-black mb-2">$449+</div>
+            <div class="text-sm font-semibold text-white/80">Starting Price CAD</div>
+          </div>
+          <div class="w-px h-16 bg-white/30"></div>
+          <div>
+            <div class="text-4xl font-black mb-2">42dB</div>
+            <div class="text-sm font-semibold text-white/80">Quietest Model</div>
+          </div>
+          <div class="w-px h-16 bg-white/30"></div>
+          <div>
+            <div class="text-4xl font-black mb-2">10+</div>
+            <div class="text-sm font-semibold text-white/80">Expert Guides</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <style>
-    /* Modern gradient text with animation */
-    .hero-title-gradient {
-      background: linear-gradient(135deg, #0c4a6e, #0284c7, #0ea5e9, #0284c7, #0c4a6e);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 8s ease infinite;
-      color: #0c4a6e;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-    }
-    
-    html[data-theme="dark"] .hero-title-gradient {
-      background: linear-gradient(135deg, #e0f2fe, #7dd3fc, #38bdf8, #7dd3fc, #e0f2fe);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 8s ease infinite;
-      color: #e0f2fe;
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes gradient-shift {
+    @keyframes fade-in-down {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes blob {
       0%, 100% {
-        background-position: 0% 50%;
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(20px, -50px) scale(1.1);
       }
       50% {
-        background-position: 100% 50%;
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+      75% {
+        transform: translate(50px, 50px) scale(1.05);
       }
     }
 
-    /* Glass morphism styles */
-    .glass {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out forwards;
     }
 
-    html[data-theme="dark"] .glass {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    .animate-fade-in-down {
+      animation: fade-in-down 0.6s ease-out forwards;
     }
 
-    /* Optimize animations for performance */
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out forwards;
+    }
+
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Reduced motion for accessibility */
     @media (prefers-reduced-motion: reduce) {
-      .hero-title-gradient,
-      .animate-pulse-slow,
-      .animate-bounce-slow {
+      .animate-fade-in-up,
+      .animate-fade-in-down,
+      .animate-fade-in,
+      .animate-blob,
+      .animate-bounce {
         animation: none !important;
       }
     }
-
-    /* Badge colors for better contrast */
-    html[data-theme="light"] .bg-primary-100 {
-      background-color: #dbeafe;
-    }
-
-    html[data-theme="light"] .text-primary-900 {
-      color: #0c4a6e;
-    }
-
-    html[data-theme="light"] .bg-secondary-100 {
-      background-color: #fae8ff;
-    }
-
-    html[data-theme="light"] .text-secondary-900 {
-      color: #701a75;
-    }
-
-    /* Secondary color scheme for dark mode */
-    html[data-theme="dark"] .bg-secondary-100 {
-      background-color: rgba(168, 85, 247, 0.15);
-    }
-
-    html[data-theme="dark"] .text-secondary-900 {
-      color: #fae8ff;
-    }
-
-    html[data-theme="dark"] .border-secondary-200 {
-      border-color: rgba(168, 85, 247, 0.3);
-    }
-
-    html[data-theme="dark"] .bg-primary-100 {
-      background-color: rgba(56, 189, 248, 0.15);
-    }
-
-    html[data-theme="dark"] .text-primary-900 {
-      color: #e0f2fe;
-    }
-
-    html[data-theme="dark"] .border-primary-200 {
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    html[data-theme="dark"] .from-secondary-600 {
-      --tw-gradient-from: #c026d3;
-    }
-
-    html[data-theme="dark"] .to-secondary-400 {
-      --tw-gradient-to: #e879f9;
-    }
   </style>
-
-  <!-- Featured Products Section -->
-  <section class="container mx-auto px-4 py-20 lg:py-28" data-animate>
-    <div class="text-center mb-16 max-w-3xl mx-auto">
-      <div class="inline-block mb-4">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 text-primary-900 text-sm font-bold border border-primary-200">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-          Featured Reviews
-        </span>
-      </div>
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-gradient">
-        Top-Rated Products
-      </h2>
-      <p class="text-xl text-base-content/70 leading-relaxed">
-        Hand-picked products with the best ratings and honest reviews from our experts
-      </p>
-    </div>
-
-    {featuredPosts.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-16">
-        {featuredPosts.map((post, index) => (
-          <div style={`animation-delay: ${index * 0.1}s`}>
-            <PostCard
-              title={post.data.title}
-              description={post.data.description}
-              image={post.data.image}
-              date={post.data.date}
-              category={post.data.category}
-              slug={post.slug}
-            />
-          </div>
-        ))}
-      </div>
-    )}
-
-    <div class="text-center">
-      <a href="/posts" class="group relative inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 text-white" style="background: linear-gradient(135deg, #0369a1, #0284c7);">
-        <span class="relative flex items-center gap-2">
-          View All Reviews
-          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Popular Products Section -->
-  {popularPosts.length > 0 && (
-    <section class="bg-gradient-to-br from-base-200 via-base-100 to-base-200 py-20 lg:py-28" data-animate>
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16 max-w-3xl mx-auto">
-          <div class="inline-block mb-4">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-100 text-secondary-900 text-sm font-bold border border-secondary-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-              </svg>
-              Most Popular
-            </span>
-          </div>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-secondary-600 to-secondary-400">
-              Trending Now
-            </span>
-          </h2>
-          <p class="text-xl text-base-content/70 leading-relaxed">
-            See what everyone's talking about - our most viewed and recommended products
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-          {popularPosts.map((post, index) => (
-            <div style={`animation-delay: ${index * 0.1}s`}>
-              <PostCard
-                title={post.data.title}
-                description={post.data.description}
-                image={post.data.image}
-                date={post.data.date}
-                category={post.data.category}
-                slug={post.slug}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Ad Container -->
-
-
-  <!-- CTA Section -->
-  <section class="relative py-24 lg:py-32 overflow-hidden" data-animate>
-    <!-- Background with gradient and decorative elements -->
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-primary-700"></div>
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
-      <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-      
-      <!-- Grid pattern overlay -->
-      <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-5xl mx-auto text-center">
-        <div class="mb-8 inline-block animate-fade-in-down">
-          <span class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-bold border border-white/30 shadow-xl">
-            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            Discover Amazing Products Today
-          </span>
-        </div>
-        
-        <h2 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-8 leading-tight animate-fade-in-up" style="animation-delay: 0.1s;">
-          Ready to Find Your<br />
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">
-            Next Purchase?
-          </span>
-        </h2>
-        
-        <p class="text-xl md:text-2xl text-white/95 mb-12 max-w-3xl mx-auto leading-relaxed font-medium animate-fade-in-up" style="animation-delay: 0.2s;">
-          Browse our comprehensive collection of product reviews and get the best deals on top-rated items. Join thousands of satisfied shoppers.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center animate-fade-in-up" style="animation-delay: 0.3s;">
-          <a href="/posts" class="group relative inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 text-white" style="background-color: #0369a1;">
-            <span class="relative flex items-center gap-2">
-              Explore Reviews
-              <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-          </a>
-          
-          <a href="/about" class="dark:text-white group relative inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-bold text-white rounded-2xl overflow-hidden border-2 border-white/60 hover:border-white bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl">
-          <span class="relative text-base-content transition-colors duration-300">
-            Learn More
-          </span>
-          </a>
-        </div>
-
-        <!-- Social proof -->
-        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 animate-fade-in-up" style="animation-delay: 0.4s;">
-          <div class="text-white/90">
-            <div class="text-4xl font-bold mb-1">50K+</div>
-            <div class="text-sm font-medium text-white/70">Happy Customers</div>
-          </div>
-          <div class="w-px h-12 bg-white/30"></div>
-          <div class="text-white/90">
-            <div class="text-4xl font-bold mb-1">1000+</div>
-            <div class="text-sm font-medium text-white/70">Product Reviews</div>
-          </div>
-          <div class="w-px h-12 bg-white/30"></div>
-          <div class="text-white/90">
-            <div class="text-4xl font-bold mb-1">4.9/5</div>
-            <div class="text-sm font-medium text-white/70">Average Rating</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 

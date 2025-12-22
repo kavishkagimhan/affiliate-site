@@ -283,15 +283,25 @@
 
   /* Skeleton loader */
   .skeleton {
-    @apply bg-base-200 animate-pulse rounded;
+    @apply bg-gray-200 animate-pulse rounded;
     background: linear-gradient(
       90deg,
-      theme('colors.base.200') 25%,
-      theme('colors.base.300') 50%,
-      theme('colors.base.200') 75%
+      rgb(229, 231, 235) 25%,
+      rgb(209, 213, 219) 50%,
+      rgb(229, 231, 235) 75%
     );
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
+  }
+
+  html[data-theme="dark"] .skeleton {
+    @apply bg-slate-700;
+    background: linear-gradient(
+      90deg,
+      rgb(51, 65, 85) 25%,
+      rgb(71, 85, 105) 50%,
+      rgb(51, 65, 85) 75%
+    );
   }
 }
 
@@ -331,4 +341,164 @@
     scroll-behavior: smooth;
   }
 }
+
+/* Product Comparison Tables */
+.product-comparison-table,
+.comparison-table,
+.roi-table {
+  @apply w-full border-collapse my-8 shadow-lg rounded-lg overflow-hidden bg-white;
+}
+
+html[data-theme="dark"] .product-comparison-table,
+html[data-theme="dark"] .comparison-table,
+html[data-theme="dark"] .roi-table {
+  @apply bg-slate-800;
+}
+
+.product-comparison-table thead,
+.comparison-table thead,
+.roi-table thead {
+  @apply bg-gradient-to-br from-sky-600 to-sky-500;
+}
+
+.product-comparison-table thead th,
+.comparison-table thead th,
+.roi-table thead th {
+  @apply px-4 py-4 text-left text-white font-bold text-sm uppercase tracking-wider border-b-4 border-sky-700;
+}
+
+.product-comparison-table tbody tr,
+.comparison-table tbody tr,
+.roi-table tbody tr {
+  @apply border-b border-gray-200 transition-all duration-200;
+}
+
+html[data-theme="dark"] .product-comparison-table tbody tr,
+html[data-theme="dark"] .comparison-table tbody tr,
+html[data-theme="dark"] .roi-table tbody tr {
+  @apply border-gray-700;
+}
+
+.product-comparison-table tbody tr:hover,
+.comparison-table tbody tr:hover,
+.roi-table tbody tr:hover {
+  @apply bg-sky-50;
+  transform: scale(1.01);
+}
+
+html[data-theme="dark"] .product-comparison-table tbody tr:hover,
+html[data-theme="dark"] .comparison-table tbody tr:hover,
+html[data-theme="dark"] .roi-table tbody tr:hover {
+  @apply bg-sky-900/20;
+}
+
+.product-comparison-table tbody td,
+.comparison-table tbody td,
+.roi-table tbody td {
+  @apply px-4 py-4 text-base;
+}
+
+.product-comparison-table tbody tr:last-child,
+.comparison-table tbody tr:last-child,
+.roi-table tbody tr:last-child {
+  @apply border-b-0;
+}
+
+html[data-theme="dark"] .product-comparison-table thead,
+html[data-theme="dark"] .comparison-table thead,
+html[data-theme="dark"] .roi-table thead {
+  @apply bg-gradient-to-br from-sky-700 to-sky-600;
+}
+
+html[data-theme="dark"] .product-comparison-table tbody td,
+html[data-theme="dark"] .comparison-table tbody td,
+html[data-theme="dark"] .roi-table tbody td {
+  @apply text-gray-100;
+}
+
+/* Mini CTA Button in tables */
+.mini-cta-btn {
+  @apply inline-block px-4 py-2 rounded-lg font-semibold text-white text-sm no-underline bg-gradient-to-r from-sky-600 to-sky-500 shadow-md;
+  transition: all 200ms ease;
+}
+
+.mini-cta-btn:hover {
+  @apply bg-gradient-to-r from-sky-700 to-sky-600 shadow-lg;
+  transform: translateY(-2px);
+}
+
+.mini-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+  .product-comparison-table,
+  .comparison-table,
+  .roi-table {
+    @apply text-sm;
+  }
+
+  .product-comparison-table thead th,
+  .comparison-table thead th,
+  .roi-table thead th {
+    @apply px-2 py-3 text-xs;
+  }
+
+  .product-comparison-table tbody td,
+  .comparison-table tbody td,
+  .roi-table tbody td {
+    @apply px-2 py-3;
+  }
+
+  .mini-cta-btn {
+    @apply px-3 py-1 text-xs;
+  }
+}
+
+/* Prose table styles for markdown tables */
+.prose table {
+  @apply w-full my-8 border-collapse shadow-lg rounded-lg overflow-hidden bg-white;
+}
+
+html[data-theme="dark"] .prose table {
+  @apply bg-slate-800;
+}
+
+.prose thead {
+  @apply bg-gradient-to-br from-sky-600 to-sky-500;
+}
+
+.prose thead th {
+  @apply px-4 py-4 text-left text-white font-bold text-sm uppercase tracking-wider;
+}
+
+.prose tbody tr {
+  @apply border-b border-gray-200 transition-all duration-200;
+}
+
+html[data-theme="dark"] .prose tbody tr {
+  @apply border-gray-700;
+}
+
+.prose tbody tr:hover {
+  @apply bg-sky-50;
+}
+
+html[data-theme="dark"] .prose tbody tr:hover {
+  @apply bg-sky-900/20;
+}
+
+.prose tbody td {
+  @apply px-4 py-4 text-base;
+}
+
+html[data-theme="dark"] .prose thead {
+  @apply bg-gradient-to-br from-sky-700 to-sky-600;
+}
+
+html[data-theme="dark"] .prose tbody td {
+  @apply text-gray-100;
+}
+
 
